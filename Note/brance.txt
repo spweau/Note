@@ -1,0 +1,207 @@
+
+
+github :
+
+git 的 用法 ：
+1. clone 想要clone 到某个文件夹
+   那么需要 cd 。。。 打开那个文件夹  ， 然后 git clone 。。。 就ok了
+
+
+2. 下载远程仓库 第一次提交的时候  需要验证密码 
+
+
+Last login: Mon Aug 22 09:06:51 on console
+
+git add .
+git commit -m 'u'
+
+如果要提交到自己的仓库
+ 需要 cd .git
+     cat fonfig
+
+
+
+fanyuandeMac-mini:~ fanyuan$ cd /Users/fanyuan/Desktop/U狗商城 
+fanyuandeMac-mini:U狗商城 fanyuan$ ls
+fanyuandeMac-mini:U狗商城 fanyuan$ git branch
+  beta2Branch
+* master
+fanyuandeMac-mini:U狗商城 fanyuan$ git branch -a
+  beta2Branch
+* master
+  remotes/origin/master
+fanyuandeMac-mini:U狗商城 fanyuan$ git checkout beta2Brach  (切换到当前 分支)
+error: pathspec 'beta2Brach' did not match any file(s) known to git.
+fanyuandeMac-mini:U狗商城 fanyuan$ git status
+On branch master
+Your branch is ahead of 'origin/master' by 3 commits.
+  (use "git push" to publish your local commits)
+nothing to commit, working directory clean 
+
+fanyuandeMac-mini:U狗商城 fanyuan$ git push
+
+fanyuandeMac-mini:U狗商城 fanyuan$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+nothing to commit, working directory clean
+
+
+fanyuandeMac-mini:U狗商城 fanyuan$ git branch
+  beta2Branch
+* master
+fanyuandeMac-mini:U狗商城 fanyuan$ git checkout beta2Branch
+Switched to branch 'beta2Branch'
+
+fanyuandeMac-mini:U狗商城 fanyuan$ git branch
+* beta2Branch
+  master
+fanyuandeMac-mini:U狗商城 fanyuan$ git push
+
+fanyuandeMac-mini:U狗商城 fanyuan$ git branch -a
+* beta2Branch
+  master
+  remotes/origin/beta2Branch
+  remotes/origin/master
+fanyuandeMac-mini:U狗商城 fanyuan$ 
+
+
+ouyameideMac-mini:ugou ouyamei$ git branch -a
+* master
+  remotes/origin/master
+ouyameideMac-mini:ugou ouyamei$ git branch -A
+error: unknown switch `A'
+usage: git branch [<options>] [-r | -a] [--merged | --no-merged]
+   or: git branch [<options>] [-l] [-f] <branch-name> [<start-point>]
+   or: git branch [<options>] [-r] (-d | -D) <branch-name>...
+   or: git branch [<options>] (-m | -M) [<old-branch>] <new-branch>
+   or: git branch [<options>] [-r | -a] [--points-at]
+
+Generic options
+    -v, --verbose         show hash and subject, give twice for upstream branch
+    -q, --quiet           suppress informational messages
+    -t, --track           set up tracking mode (see git-pull(1))
+    --set-upstream        change upstream info
+    -u, --set-upstream-to <upstream>
+                          change the upstream info
+    --unset-upstream      Unset the upstream info
+    --color[=<when>]      use colored output
+    -r, --remotes         act on remote-tracking branches
+    --contains <commit>   print only branches that contain the commit
+    --abbrev[=<n>]        use <n> digits to display SHA-1s
+
+Specific git-branch actions:
+    -a, --all             list both remote-tracking and local branches
+    -d, --delete          delete fully merged branch
+    -D                    delete branch (even if not merged)
+    -m, --move            move/rename a branch and its reflog
+    -M                    move/rename a branch, even if target exists
+    --list                list branch names
+    -l, --create-reflog   create the branch's reflog
+    --edit-description    edit the description for the branch
+    -f, --force           force creation, move/rename, deletion
+    --merged <commit>     print only branches that are merged
+    --no-merged <commit>  print only branches that are not merged
+    --column[=<style>]    list branches in columns
+    --sort <key>          field name to sort on
+    --points-at <object>  print only branches of the object
+
+ouyameideMac-mini:ugou ouyamei$ git branch -a
+* master
+  remotes/origin/master
+ouyameideMac-mini:ugou ouyamei$ git branch
+* master
+ouyameideMac-mini:ugou ouyamei$ git pull
+remote: Counting objects: 25, done
+remote: Finding sources: 100% (17/17)
+remote: Getting sizes: 100% (21/21)
+remote: Total 17 (delta 3), reused 17 (delta 3)
+Unpacking objects: 100% (17/17), done.
+From ssh://120.26.226.77:29418/ios/ugou
+ * [new branch]      MessageBranch_Bate1_1_0 -> origin/MessageBranch_Bate1_1_0
+Already up-to-date.
+ouyameideMac-mini:ugou ouyamei$ git branch -a
+* master
+  remotes/origin/MessageBranch_Bate1_1_0
+  remotes/origin/master
+
+
+
+- - - - - - - - - - - - - - - - - - - - — - - - - — - - - - - - -
+
+
+
+ouyameideMac-mini:ugou_new20161010 ouyamei$ git status
+^C
+ouyameideMac-mini:ugou_new20161010 ouyamei$ git branch
+  IM_NewBranch_1011
+  ModifyWithdrawBranch_1.0.0
+* master
+ouyameideMac-mini:ugou_new20161010 ouyamei$ git status
+On branch master
+Your branch and 'origin/master' have diverged,
+and have 2035 and 139452 different commits each, respectively.
+  (use "git pull" to merge the remote branch into yours)
+nothing to commit, working tree clean
+
+ouyameideMac-mini:ugou_new20161010 ouyamei$ git pull
+remote: Counting objects: 6, done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 6 (delta 3), reused 6 (delta 3), pack-reused 0
+Unpacking objects: 100% (6/6), done.
+From https://github.com/CocoaPods/Specs
+   6e99d6c..459b727  master     -> origin/master
+ * [new tag]         20161019   -> 20161019
+fatal: refusing to merge unrelated histories
+
+— — — — — — — — — — — — — 查看 .git 文件— — — — — — — — — — — — — — 
+ouyameideMac-mini:ugou_new20161010 ouyamei$ ls -a
+.			.ig.swp			ugou
+..			Podfile			ugou.xcodeproj
+.DS_Store		Podfile.lock		ugou.xcworkspace
+.git			Pods			ugouTests
+.gitignore		README.md		ugouUITests
+ouyameideMac-mini:ugou_new20161010 ouyamei$ cd .git
+ouyameideMac-mini:.git ouyamei$ cat config 
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	ignorecase = true
+	precomposeunicode = true
+[remote "origin"]
+	url = https://github.com/CocoaPods/Specs.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+[branch "IMBranch_1_2_0"]
+[branch "IM_NewBranch_1011"]
+	remote = origin
+	merge = refs/heads/IM_NewBranch_1011
+[branch "ModifyWithdrawBranch_1.0.0"]
+	remote = origin
+	merge = refs/heads/ModifyWithdrawBranch_1.0.0
+ouyameideMac-mini:.git ouyamei$ vim config 
+ouyameideMac-mini:.git ouyamei$ cat config 
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	ignorecase = true
+	precomposeunicode = true
+[remote "origin"]
+	url = ssh://oyamei@120.26.226.77:29418/ios/ugou.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+[branch "IMBranch_1_2_0"]
+[branch "IM_NewBranch_1011"]
+	remote = origin
+	merge = refs/heads/IM_NewBranch_1011
+[branch "ModifyWithdrawBranch_1.0.0"]
+	remote = origin
+	merge = refs/heads/ModifyWithdrawBranch_1.0.0
+ouyameideMac-mini:.git ouyamei$ 

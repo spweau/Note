@@ -1,0 +1,324 @@
+
+pod 'RongCloudIMKit', '~> 2.7.1'
+
+
+
+1.gem 是管理ruby库源的标准包
+
+======================
+如果安装比较慢就（control + c ）
+不更换源有可能就会出现一下问题
+ERROR:  Could not find a valid gem 'cocoapods' (>= 0), here is why:
+          Unable to download data from https://rubygems.org/ - Errno::ECONNRESET: Connection reset by peer - SSL_connect (https://rubygems.org/latest_specs.4.8.gz)
+
+
+
+
+
+
+===== 1 安装之前更换源
+1.1 删除掉旧源（国外的源）
+gem sources --remove https://rubygems.org/
+1.2 添加新源（国内的源）
+	注意：以前是http://ruby.taobao.org/
+	     现在是https://ruby.taobao.org/
+	要小心
+gem sources -a https://ruby.taobao.org/
+
+1.3检测当前的源是什么（非必要）
+gem sources -l
+
+===== 2 注意安装之前最好升级gem因为旧的可能安装失败
+2.1 升级 
+	(注意—system  是两个- - )
+sudo gem update —system
+
+
+===== 3 安装
+sudo gem install cocoapods 
+
+
+===== 4 初始化第三方库信息
+ 
+注意：直接使用 pod setup 会比较满（这是国外的repo（仓库））
+
+所以
+4.1 更换国内的仓库：
+4.1.1 删除以前的仓库
+pod repo remove master
+4.1.2 更换国内的仓库
+pod repo add master https://gitcafe.com/akuandev/Specs.git
+
+4.1.3 安装仓库（第一次初始化需要）
+pod setup
+
+注意：以后更新直接用这个
+pod repo update
+
+4.1.4 怎么判断装好了，尝试搜索框架
+pod search AFNetworking
+
+
+
+=========使用
+1.0 创建一个工程
+1.1 终端： 
+	vim Podfile
+1.1.0 vim编译器里面（注意不要有中文符号）
+platform :ios, '8.0'
+pod 'SDWebImage'
+pod 'Masonry'
+
+
+========最后
+pod install 
+
+
+===最后的最后，如果想要更新或者修改
+
+end1.1： vim Podfile
+然后编辑vim
+
+最后退出
+
+之后
+pod install 
+或者
+pod update
+都可以
+
+（不用担心重复安装，已经安装的不会再安装了）
+
+ 
+======
+open ./ 打开当前文件夹
+
+cat Podfile 查看文件内容
+
+
+
+===============
+官网可看哪些框架支持 cocoapods
+cocoapods.org
+
+=================错误
+ERROR:  While executing gem ... (Errno::EPERM)
+    Operation not permitted - /usr/bin/fuzzy_match
+解决办法： （更改安装目录）
+sudo gem install -n /usr/local/bin cocoapods 
+
+
+
+=============================================================网找到其他错误
+1、ERROR:  While executing gem ... (Errno::EPERM)
+    Operation not permitted - /usr/bin/fuzzy_match
+
+sudo gem install -n /usr/local/bin cocoapods
+
+2、Updating local specs repositories
+
+
+pod update 试了还可以用
+
+pod install  被墙了，请大家换成pod install --verbose --no-repo-update
+
+
+
+
+3、出现Setting up CocoaPods master repo，半天没有任何反应。原因无他，因为那堵墙阻挡了cocoapods.org。。。
+
+gitcafe和oschina都是国内的服务器，可以用它们CocoaPods索引库的镜像：
+
+$ pod repo remove master
+
+$ pod repo add master https://gitcafe.com/akuandev/Specs.git
+
+$ pod repo update
+
+如果想用oschina的镜像也可以把第二条命令 换成 http://git.oschina.net/akuandev/Specs.git 即可
+
+
+
+第二条命令执行的时候会比较耗时，这个时候要去把整个specs仓库clone一下，下载到 ~/.cocoapods里；
+
+cd  到该目录里，用du -sh *命令来查看文件大小，每隔一会看看，最终大小是190多M。
+
+====================================
+ERROR:  Error installing cocoapods:
+	activesupport requires Ruby version >= 2.2.2.
+
+
+//–––––––––––那么问题来了——没遇到的自动跳过————————————
+
+错误提示1
+Error installing cocoapods:  activesupport requires Ruby version >= 2.2.2.
+
+解决方案 ：
+1、安装 RVM baby 版本管理器 
+
+$curl -L get.rvm.io | bash -s stable
+
+//________等安装完成 出现下面这行提示以下___________
+
+In case of problems: https://rvm.io/helpandhttps://twitter.com/rvm_io
+
+执行
+
+$source ~/.bashrc  
+
+$source ~/.bash_profile  
+
+测试是否安装正常
+
+$rvm -v  
+
+//________提示以下___________
+
+rvm 1.27.0 (latest) by Wayne E. Seguin, Michal Papis[https://rvm.io/]
+
+2、用RVM升级Ruby查看当前ruby版本
+
+ $ruby -v 
+
+$rvm list known
+
+//________提示以下___________
+
+# MRI Rubies
+
+[ruby-]1.8.6[-p420]
+
+[ruby-]1.8.7[-head] # security released on head
+
+[ruby-]1.9.1[-p431]
+
+[ruby-]1.9.2[-p330]
+
+[ruby-]1.9.3[-p551]
+
+[ruby-]2.0.0[-p648]
+
+[ruby-]2.1[.8]
+
+[ruby-]2.2[.4]
+
+[ruby-]2.3[.0]
+
+[ruby-]2.2-headruby-head
+
+# for forks use: rvm install ruby-head---url https://github.com/github/ruby.git --branch 2.2
+
+# JRuby
+
+ 
+
+安装ruby 2.2.2 执行
+
+$rvm install 2.2.2
+
+ 
+
+如果打印：
+
+复制代码
+复制代码
+……  ruby-2.2.2 - #validate archive
+    ruby-2.2.2 - #extract
+    ruby-2.2.2 - #validate binary
+    ruby-2.2.2 - #setup
+    ruby-2.2.2 - #gemset created /Users/abc/.rvm/gems/ruby-2.2.2@global
+    ruby-2.2.2 - #importing gemset             
+   /Users/abc/.rvm/gemsets/global.gems..............................
+    ruby-2.2.2 - #generating global wrappers........
+    ruby-2.2.2 - #gemset created /Users/abc/.rvm/gems/ruby-2.2.2
+    ruby-2.2.2 - #importing gemsetfile /Users/abc/.rvm/gemsets/default.gems                          
+ 　　evaluated to empty gem list 
+    ruby-2.2.2 - #generating default wrappers........
+    Updating certificates in '/etc/openssl/cert.pem'.
+    mkdir: /etc/openssl: Permission denied
+    mkdir -p "/etc/openssl" failed, retrying with sudo
+    LiuWenqiang password required for 'mkdir -p /etc/openssl': 
+    and sudo mkdir worked
+复制代码
+复制代码
+ 则说明安装成功了
+
+打印代码：
+
+复制代码
+复制代码
+Done with Command Line Tools (OS X 10.11) for Xcode
+Done.
+==> /usr/bin/sudo /bin/rm -f /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+==> Installing the Command Line Tools (expect a GUI popup):
+==> /usr/bin/sudo /usr/bin/xcode-select --install
+xcode-select: error: command line tools are already installed, use "Software Update" to install updates
+Failed during: /usr/bin/sudo /usr/bin/xcode-select --install
+Requirements installation failed with status: 1.
+复制代码
+ 
+复制代码
+ 
+
+4.  继续安装 CocoaPods
+ 
+
+$sudo gem install cocoa pods
+
+$sudo gem install -n /usr/local/bin cocoapods
+
+$pod setup
+
+
+===============================================
+pod》error:The dependency `` is not used in any concrete target
+内容提要：
+
+　　podfile升级之后到最新版本，pod里的内容必须明确指出所用第三方库的target，否则会出现The dependency `` is not used in any concrete target这样的错误。
+
+以下从三个步骤陈述：
+
+1. Podfile升级
+
+查看pod版本：
+
+pod --version
+pod 升级（此时是升级到1.0.0.beta.2版本）：
+
+sudo gem install cocoapods --pre
+2. 错误内容：
+
+我的Podfile的内容是：
+
+platform :ios, '7.0'
+
+pod 'ReactiveCocoa', '2.1.8'
+pod 'objectiveflickr', '2.0.4'
+pod 'LinqToObjectiveC', '2.0.0'
+pod 'SDWebImage', '3.6'
+pod install后出现错误The dependency `` is not used in any concrete target
+
+复制代码
+pod install
+/System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/universal-darwin14/rbconfig.rb:213: warning: Insecure world writable dir /Applications/Cocos/tools/ant/bin in PATH, mode 040777
+Re-creating CocoaPods due to major version update.
+Updating local specs repositories
+Analyzing dependencies
+[!] The dependency `ReactiveCocoa (= 2.1.8)` is not used in any concrete target.
+The dependency `objectiveflickr (= 2.0.4)` is not used in any concrete target.
+The dependency `LinqToObjectiveC (= 2.0.0)` is not used in any concrete target.
+The dependency `SDWebImage (= 3.6)` is not used in any concrete target.
+复制代码
+3. 修改方法：
+
+Podfile内容更改：
+
+复制代码
+platform :ios, '7.0'
+
+target "RWTFlickrSearch" do
+pod 'ReactiveCocoa', '2.1.8'
+pod 'objectiveflickr', '2.0.4'
+pod 'LinqToObjectiveC', '2.0.0'
+pod 'SDWebImage', '3.6'
+end
